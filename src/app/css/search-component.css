@@ -23,7 +23,7 @@
 /* Search screen css */
 .center-form {
   width:180px;
-  height:400px;
+  height:250px;
   text-align:center;
 }
 .center-form .label {
@@ -46,23 +46,6 @@
   height: 30px;
   padding-right: 32px;
   padding-left:8px;
-}
-.location-btn {
-  background:#a970ff;
-  box-shadow: 3px 3px 25px -7px;
-  border:none;
-  display:inline-block;
-  width: 176px;
-  height: 30px;
-  padding-left: 32px;
-}
-.icon-cont {
-  vertical-align:middle;
-  background-color:white;
-  display:inline-block;
-  margin: 2px -34px 4px 2px;
-  height: 26px;
-  width: 26px;
 }
 .search-btn {
   vertical-align:middle;
@@ -99,4 +82,37 @@
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
   color:    #cdacff;
   font-family: biko_regular;
+}
+.location-cont {
+  margin-top:15px;
+}
+.location-btn {
+  color:#a871fd;
+  background:#70ff91;
+  box-shadow: 3px 3px 25px -7px;
+  border:1px solid #c6a57b;
+  display:inline-block;
+  width: 176px;
+  height: 30px;
+  line-height:30px;
+  vertical-align: middle;
+}
+.icon-cont {
+  position:absolute;
+  vertical-align:middle;
+  background-color:#70ff91;
+  display:inline-block;
+  margin: 2px 2px 4px -173px;
+  height: 26px;
+  width: 26px;
+}
+.fa-location-arrow {
+  display:inline-block;
+  font-size: 15px;
+  line-height: 26px;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  vertical-align: bottom;
+  color: #a871fd;
 }

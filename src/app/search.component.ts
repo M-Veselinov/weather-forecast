@@ -20,7 +20,7 @@ import './services/autocomplete.service';
           umbrellapp
         </div>
       </div>
-      <div class="center-block center-form">
+      <div *ngIf="showContent" class="center-block center-form">
         <div class="label">type a location: </div>
         <div class="input-cont">
           <ng2-completer inputClass="search-input" placeholder="type here.." [ngModel]="name" [datasource]="dataService" (ngModelChange)="requestDropdownData($event)" [minSearchLength]="0"></ng2-completer>
@@ -71,7 +71,6 @@ export class SearchComponent {
   /* Autocomplete related methods */
   displaySuggestions = (predictions, status) => {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
-      alert(status);
       return;
     }
     this.dataService = this.completerService.local(predictions, 'description', 'description');
