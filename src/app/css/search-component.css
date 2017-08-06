@@ -1,0 +1,102 @@
+/* Loading screen css */
+.wrapp {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+  background-color: #ff7070;
+}
+.center {
+  height: 30%;
+  position: absolute;
+  top:20%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-family: biko_regular;
+  color:#fff2f2;
+  font-size:22px;
+  text-align: center;
+}
+
+/* Search screen css */
+.center-form {
+  width:180px;
+  height:400px;
+  text-align:center;
+}
+.center-form .label {
+  font-family: biko_regular;
+  font-size:15px;
+}
+.input-cont {
+  margin-top:15px;
+  margin-bottom:20px;
+}
+.completer-holder {
+  display:inline-block;
+}
+.completer-input {
+  background:#a970ff;
+  box-shadow: 3px 3px 25px -7px;
+  border:none;
+  display:inline-block;
+  width: 176px;
+  height: 30px;
+  padding-right: 32px;
+  padding-left:8px;
+}
+.location-btn {
+  background:#a970ff;
+  box-shadow: 3px 3px 25px -7px;
+  border:none;
+  display:inline-block;
+  width: 176px;
+  height: 30px;
+  padding-left: 32px;
+}
+.icon-cont {
+  vertical-align:middle;
+  background-color:white;
+  display:inline-block;
+  margin: 2px -34px 4px 2px;
+  height: 26px;
+  width: 26px;
+}
+.search-btn {
+  vertical-align:middle;
+  background-color:white;
+  display:inline-block;
+  margin: 2px 2px 4px -34px;
+  height: 26px;
+  width: 26px;
+}
+.fa-search {
+  display:inline-block;
+  font-size: 15px;
+  line-height: 26px;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  vertical-align: bottom;
+  color: #a970ff;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #cdacff;
+  font-family: biko_regular;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color:    #cdacff;
+  opacity:  1;
+  font-family: biko_regular;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color:    #cdacff;
+  opacity:  1;
+  font-family: biko_regular;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color:    #cdacff;
+  font-family: biko_regular;
+}
