@@ -1,0 +1,53 @@
+<div class="wrapp" [ngClass]="{'forecastWrap': forecast }">
+  <div *ngIf="!showContent" class="row">
+    <div class="col-md-2 col-md-offset-5 center">
+      umbrellapp
+    </div>
+  </div>
+  <span (click)="sideBarActive = !sideBarActive" class="menu-span glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+  <nav class="col-md-3" id="sidebar" [ngClass]="{'active': !sideBarActive}">
+    <span (click)="sideBarActive = !sideBarActive"  class="close-span glyphicon glyphicon-remove"></span>
+    <div class="white-text top-text">Your</div>
+    <div class="white-text">best</div>
+    <div class="white-text">weather</div>
+    <div class="white-text">app</div>
+    <div class="purple-text purple-top">team</div>
+    <div class="purple-text">history</div>
+    <div class="purple-text">contact</div>
+    <div class="share-info">suggest to a friend</div>
+    <div class="share-icons">
+      <span class="icon-share" ceiboShare  [facebook]="{u: appUrl}"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+      <span class="icon-share" ceiboShare  [twitter]="{url:appUrl, text:'Checkout this awesome weather app', hashtags:'angular2, social, weather'}"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+      <span class="icon-share" ceiboShare  [googlePlus]="{url:appUrl}"><i class="fa fa-google-plus" aria-hidden="true"></i></span>
+    </div>
+  </nav>
+  <div class="center-block center-form" *ngIf="!forecast && showContent">
+    <div class="label">type a location: </div>
+    <div class="input-cont">
+      <ng2-completer inputClass="search-input" placeholder="type here.." [ngModel]="name" [datasource]="dataService" (ngModelChange)="requestDropdownData($event)" [minSearchLength]="1"></ng2-completer>
+      <div class="search-btn" (click)="searchWeatherByName()"><i class="fa fa-search" aria-hidden="true"></i></div>
+    </div>
+    <div class="label">or give us your location</div>
+    <div class="location-cont">
+      <div class="location-btn" (click)="locate()">access location</div>
+      <div class="icon-cont"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+    </div>
+  </div>
+  <div *ngIf="forecast" class="col-md-6 center-block forecast-cont">
+    <div class="today-cont">
+      <div class="desc-cont green-cont">{{forecast.todayData.getDayAsString(true).toUpperCase()}}</div>
+      <div class="desc-cont">{{forecast.city.name}}</div>
+      <div class="today-weather-icon"><i [ngClass]="weatherService.getIconById(forecast.todayData.weather.icon)"></i></div>
+      <div class="max-temp-cont green-cont">{{forecast.todayData.getMaxTemp()}} &#8451;</div>
+      <div class="min-temp-cont">{{forecast.todayData.getMinTemp()}} &#8451;</div>
+    </div>
+    <div *ngIf="forecast" class="days-cont">
+      <div *ngFor="let info of forecast.dailyData" class="day">
+        <div class="day-desc">{{info.getDayAsString(false)}}</div>
+        <div class="day-weather-icon"><i [ngClass]="weatherService.getIconById(info.weather.icon)"></i></div>
+        <div class="day-max">{{info.getMaxTemp()}} &#8451;</div>
+        <div class="day-min">{{info.getMinTemp()}} &#8451;</div>
+      </div>
+    </div>
+  </div>
+</div>

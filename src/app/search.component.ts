@@ -13,55 +13,18 @@ import './services/autocomplete.service';
   selector: "search-component",
   encapsulation : ViewEncapsulation.None,
   styleUrls: [ './css/search-component.css' ],
-  template: `
-    <div class="wrapp" [ngClass]="{'forecastWrap': forecast }">
-      <div *ngIf="!showContent" class="row">
-        <div class="col-md-2 col-md-offset-5 center">
-          umbrellapp
-        </div>
-      </div>
-      <div class="center-block center-form" *ngIf="!forecast && showContent">
-        <div class="label">type a location: </div>
-        <div class="input-cont">
-          <ng2-completer inputClass="search-input" placeholder="type here.." [ngModel]="name" [datasource]="dataService" (ngModelChange)="requestDropdownData($event)" [minSearchLength]="0"></ng2-completer>
-          <div class="search-btn" (click)="searchWeatherByName()"><i class="fa fa-search" aria-hidden="true"></i></div>
-        </div>
-        <div class="label">or give us your location</div>
-        <div class="location-cont">
-            <div class="location-btn" (click)="locate()">access location</div>
-            <div class="icon-cont"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
-        </div>
-      </div>
-        <!---->
-          <!--<button ceiboShare  [facebook]="{u: appUrl}">Facebook</button>-->
-          <!--<button ceiboShare  [googlePlus]="{url:appUrl}">Google Plus</button>-->
-          <!--<button ceiboShare  [twitter]="{url:appUrl, text:'Checkout this awesome weather app', hashtags:'angular2, social, weather'}">Twitter</button>-->
-        <!--</div>-->
-      <div *ngIf="forecast" class="today-cont center-block center-form">
-        <div class="desc-cont green-cont">{{forecast.todayData.getDayAsString(true).toUpperCase()}}</div>
-        <div class="desc-cont">{{forecast.city.name}}</div>
-        <img class="weather-icon" src={{forecast.todayData.weather.icon}}>
-        <div class="max-temp-cont green-cont">{{forecast.todayData.maxTemp}} &#8451;</div>
-        <div class="min-temp-cont">{{forecast.todayData.minTemp}} &#8451;</div>
-      </div>
-      <div *ngIf="forecast" class="days-cont">
-        <div [ngClass]="{'first-day': i==0 }" *ngFor="let info of forecast.dailyData;let i = index" class="day">
-            <div class="day-desc">{{info.getDayAsString(false)}}</div>
-            <img class="day-weather-icon" src={{info.weather.icon}}>
-            <div class="day-max">{{info.maxTemp}} &#8451;</div>
-            <div class="day-min">{{info.minTemp}} &#8451;</div>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: "./search-component.html"
 })
 export class SearchComponent {
-  public appUrl = 'https://github.com/M-Veselinov/SpringPractice';
+  public appUrl = 'https://github.com/M-Veselinov/weather-forecast';
 
   name: string;
   forecast: Forecast;
-  dataService: CompleterData;
+  dataService: any = [];
+  tempData: any = [];
   showContent: boolean = false;
+  sideBarActive: boolean = false;
+
   constructor(private weatherService: WeatherService,
                 private completerService: CompleterService) {
     setTimeout(()=>this.showContent=true, 0);
@@ -72,7 +35,10 @@ export class SearchComponent {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
       return;
     }
-    this.dataService = this.completerService.local(predictions, 'description', 'description');
+    this.tempData = this.completerService.local(predictions, 'description', 'description');
+    if (this.dataService != this.tempData) {
+      setTimeout(()=>this.dataService=this.tempData, 200);
+    }
   };
 
   requestDropdownData(name): void {

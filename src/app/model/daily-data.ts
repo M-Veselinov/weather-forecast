@@ -28,6 +28,14 @@ export class DailyData {
     return this;
   }
 
+  getMinTemp () {
+    return Math.round(this.minTemp);
+  }
+
+  getMaxTemp () {
+    return Math.round(this.maxTemp);
+  }
+
   // Format date day to appropriate string for display on page.
   public getDayAsString(isToday: boolean): string {
     if (isToday) {

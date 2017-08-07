@@ -11,7 +11,7 @@ export class Weather {
     let input = i[0];
     this.main = input.main;
     this.description = input.description;
-    this.icon = "http://openweathermap.org/img/w/" + input.icon + ".png";
+    this.icon = input.id;
     return this;
   }
 

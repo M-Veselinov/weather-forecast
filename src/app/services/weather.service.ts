@@ -12,9 +12,11 @@ export class WeatherService {
 
   private weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast';
   private cities: City[] = [];
+  private icons: any[] = [];
 
   constructor(private http: Http) {
     this.getCities().then(cities => this.cities = cities);
+    this.getIcons().then(icons => this.icons = icons);
   }
 
   public getCities(): Promise<Array<City>> {
@@ -22,6 +24,24 @@ export class WeatherService {
       .toPromise()
       .then(response => City.deserializeArr(response.json()))
       .catch(this.handleError);
+  }
+
+  public getIcons(): Promise<Array<any>> {
+    return this.http.get('assets/icon.list.json')
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  public getIconById(id: string): any {
+    let iconId;
+    for (let key in this.icons) {
+      let value = this.icons[key];
+      if (key == id) {
+        iconId = 'wi wi-day-' + value.icon;
+      }
+    }
+    return  iconId;
   }
 
   public getCityByName(name:string): City {
