@@ -14,13 +14,13 @@ import './services/autocomplete.service';
   encapsulation : ViewEncapsulation.None,
   styleUrls: [ './css/search-component.css' ],
   template: `
-    <div class="wrapp">
+    <div class="wrapp" [ngClass]="{'forecastWrap': forecast }">
       <div *ngIf="!showContent" class="row">
         <div class="col-md-2 col-md-offset-5 center">
           umbrellapp
         </div>
       </div>
-      <div *ngIf="showContent" class="center-block center-form">
+      <div class="center-block center-form" *ngIf="!forecast && showContent">
         <div class="label">type a location: </div>
         <div class="input-cont">
           <ng2-completer inputClass="search-input" placeholder="type here.." [ngModel]="name" [datasource]="dataService" (ngModelChange)="requestDropdownData($event)" [minSearchLength]="0"></ng2-completer>
@@ -37,22 +37,21 @@ import './services/autocomplete.service';
           <!--<button ceiboShare  [googlePlus]="{url:appUrl}">Google Plus</button>-->
           <!--<button ceiboShare  [twitter]="{url:appUrl, text:'Checkout this awesome weather app', hashtags:'angular2, social, weather'}">Twitter</button>-->
         <!--</div>-->
-      <div *ngIf="forecast">
-        <div class="today-cont">
-          <div>{{forecast.todayData.getDayAsString(true)}}</div>
-          <div>{{forecast.city.name}}</div>
-          <div>{{forecast.todayData.maxTemp}}</div>
-          <div>{{forecast.todayData.minTemp}}</div>
-        </div>
-        <div class="days-cont">
-          <div *ngFor="let info of forecast.dailyData" class="day">
-              <div>{{info.getDayAsString(false)}}</div>
-              <div>{{info.maxTemp}}</div>
-              <div>{{info.minTemp}}</div>
-          </div>
+      <div *ngIf="forecast" class="today-cont center-block center-form">
+        <div class="desc-cont green-cont">{{forecast.todayData.getDayAsString(true).toUpperCase()}}</div>
+        <div class="desc-cont">{{forecast.city.name}}</div>
+        <img class="weather-icon" src={{forecast.todayData.weather.icon}}>
+        <div class="max-temp-cont green-cont">{{forecast.todayData.maxTemp}} &#8451;</div>
+        <div class="min-temp-cont">{{forecast.todayData.minTemp}} &#8451;</div>
+      </div>
+      <div *ngIf="forecast" class="days-cont">
+        <div [ngClass]="{'first-day': i==0 }" *ngFor="let info of forecast.dailyData;let i = index" class="day">
+            <div class="day-desc">{{info.getDayAsString(false)}}</div>
+            <img class="day-weather-icon" src={{info.weather.icon}}>
+            <div class="day-max">{{info.maxTemp}} &#8451;</div>
+            <div class="day-min">{{info.minTemp}} &#8451;</div>
         </div>
       </div>
-      <p *ngIf="forecast">{{forecast.mainTemp}}</p>
     </div>
   `
 })
@@ -65,7 +64,7 @@ export class SearchComponent {
   showContent: boolean = false;
   constructor(private weatherService: WeatherService,
                 private completerService: CompleterService) {
-    setTimeout(()=>this.showContent=true, 1000);
+    setTimeout(()=>this.showContent=true, 0);
   }
 
   /* Autocomplete related methods */

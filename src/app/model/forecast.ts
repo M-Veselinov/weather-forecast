@@ -22,6 +22,7 @@ export class Forecast {
         }
         if (maxTemp < i.main.temp_max) {
           maxTemp = i.main.temp_max;
+          info.weather = i.weather;
         }
       }
     }

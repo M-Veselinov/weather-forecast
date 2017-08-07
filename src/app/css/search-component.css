@@ -6,6 +6,11 @@
   align-items: center;
   background-color: #ff7070;
 }
+
+.forecastWrap {
+  background-color:#a970ff;
+}
+
 .center {
   height: 30%;
   position: absolute;
@@ -115,4 +120,74 @@
   text-align: center;
   vertical-align: bottom;
   color: #a871fd;
+}
+
+/* Forecast css */
+.desc-cont{
+  font-family:biko_regular;
+  color: white;
+  font-size:25px;
+}
+
+.weather-icon {
+  width:100%;
+}
+
+.green-cont {
+  color:#8bb9c6;
+}
+
+.max-temp-cont {
+  color:#74f39a;
+  font-family: biko_regular;
+  font-size:25px;
+}
+
+.min-temp-cont {
+  color: #8bb9c5;
+  font-family:biko_regular;
+  font-size:20px;
+}
+
+.days-cont {
+  position:absolute;
+  width:800px;
+  height:250px;
+  bottom:25px;
+  right:25%;
+  left:50%;
+  margin-left:-400px;
+}
+
+.day {
+  text-align:center;
+  display:inline-block;
+  width:140px;
+}
+
+.first-day {
+  margin-left:50px;
+}
+
+.day-desc {
+  font-family:biko_regular;
+  color: white;
+  font-size:15px;
+}
+
+.day-weather-icon {
+  text-align:center;
+  width:60%;
+}
+
+.day-max {
+  color:#74f39a;
+  font-family: biko_regular;
+  font-size:20px;
+}
+
+.day-min {
+  color: #8bb9c5;
+  font-family:biko_regular;
+  font-size:15px;
 }

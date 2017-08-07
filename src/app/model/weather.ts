@@ -7,10 +7,11 @@ export class Weather {
   description: string;
   icon: string;
 
-  deserialize(input:any) {
+  deserialize(i:any) {
+    let input = i[0];
     this.main = input.main;
     this.description = input.description;
-    this.icon = input.icon;
+    this.icon = "http://openweathermap.org/img/w/" + input.icon + ".png";
     return this;
   }
 
