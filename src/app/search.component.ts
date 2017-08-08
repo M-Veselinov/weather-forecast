@@ -16,12 +16,12 @@ import './services/autocomplete.service';
   templateUrl: "./search-component.html"
 })
 export class SearchComponent {
+  // Url to be shared using the share icons
   public appUrl = 'https://github.com/M-Veselinov/weather-forecast';
 
   name: string;
   forecast: Forecast;
   dataService: any = [];
-  tempData: any = [];
   showContent: boolean = false;
   sideBarActive: boolean = false;
 
@@ -31,17 +31,24 @@ export class SearchComponent {
   }
 
   /* Autocomplete related methods */
-  displaySuggestions = (predictions, status) => {
+  /**
+   * Handles response from google autocomplete api
+   * @param {Array} predictions array with prediction objects
+   * @param {String} status of the request
+   */
+  displaySuggestions = (predictions: any[], status:string) => {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
       return;
     }
-    this.tempData = this.completerService.local(predictions, 'description', 'description');
-    if (this.dataService != this.tempData) {
-      setTimeout(()=>this.dataService=this.tempData, 200);
-    }
+    this.dataService = this.completerService.local(predictions, 'description', 'description');
   };
 
-  requestDropdownData(name): void {
+  /**
+   * Method to request autocomplete data from google api,
+   * invoked when search input value is changed
+   * @param {String} name current value of the input field
+   */
+  requestDropdownData(name: string): void {
     this.name = name;
     if (this.name) {
       let service = new google.maps.places.AutocompleteService();
@@ -51,6 +58,9 @@ export class SearchComponent {
 
   /* Weather related methods */
 
+  /**
+   * Method used to get weather forecast by city name.
+   */
   searchWeatherByName(): void {
     let params: URLSearchParams = new URLSearchParams();
     if (this.name) {
@@ -65,6 +75,10 @@ export class SearchComponent {
     }
   }
 
+  /**
+   * Get weather forecast by given location (longitude, latitude)
+   * @param {Object} input
+   */
   searchWeatherByLocation(input:any): void {
     let locArr = input.loc.split(',');
     let latitude = locArr[0];

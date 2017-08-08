@@ -19,6 +19,11 @@ export class WeatherService {
     this.getIcons().then(icons => this.icons = icons);
   }
 
+  /**
+   * Method used to get all cities supported by openweathermap api
+   * from local json file
+   * @returns {Promise<Array<City>>} array with city model objects
+   */
   public getCities(): Promise<Array<City>> {
     return this.http.get('assets/city.list.json')
       .toPromise()
@@ -26,6 +31,11 @@ export class WeatherService {
       .catch(this.handleError);
   }
 
+  /**
+   * Retrieves icons from local json file.
+   * These icons are used to be mapped to the weather forecast response
+   * @returns {Promise<Array<any>>}
+   */
   public getIcons(): Promise<Array<any>> {
     return this.http.get('assets/icon.list.json')
       .toPromise()
@@ -33,6 +43,12 @@ export class WeatherService {
       .catch(this.handleError);
   }
 
+  /**
+   * Get mapped icon by given id
+   * Returned string is valid weather-icons icon, according to the weather.
+   * @param {String} id icon id
+   * @returns {String} mapped icon id
+   */
   public getIconById(id: string): any {
     let iconId;
     for (let key in this.icons) {
@@ -48,13 +64,22 @@ export class WeatherService {
     return this.cities.find(city => city.name === name);
   }
 
-  public getLocation() {
+  /**
+   * Get client current location
+   * @returns {Promise<any>}
+   */
+  public getLocation(): Promise<any> {
       return this.http.get('http://ipinfo.io')
         .toPromise()
         .then(response => response.json())
         .catch(this.handleError);
   }
 
+  /**
+   * Get weather by given params (city name, location) or others
+   * @param {URLSearchParams} params to be included in the request
+   * @returns {Promise<Forecast>} forecast object
+   */
   getWeather(params: URLSearchParams): Promise<Forecast> {
     params.set('units', 'metric');
     params.set('APPID', '06dd8d85cd918db0f43788692a652e9a');

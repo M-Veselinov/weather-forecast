@@ -24,7 +24,7 @@
   <div class="center-block center-form" *ngIf="!forecast && showContent">
     <div class="label">type a location: </div>
     <div class="input-cont">
-      <ng2-completer inputClass="search-input" placeholder="type here.." [ngModel]="name" [datasource]="dataService" (ngModelChange)="requestDropdownData($event)" [minSearchLength]="1"></ng2-completer>
+      <ng2-completer (keyup.enter)="searchWeatherByName()" inputClass="search-input" placeholder="type here.." [ngModel]="name" [datasource]="dataService" (ngModelChange)="requestDropdownData($event)" [minSearchLength]="1"></ng2-completer>
       <div class="search-btn" (click)="searchWeatherByName()"><i class="fa fa-search" aria-hidden="true"></i></div>
     </div>
     <div class="label">or give us your location</div>
