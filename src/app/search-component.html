@@ -4,8 +4,8 @@
       umbrellapp
     </div>
   </div>
-  <span (click)="sideBarActive = !sideBarActive" class="menu-span glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-  <nav class="col-md-3" id="sidebar" [ngClass]="{'active': !sideBarActive}">
+  <span *ngIf="showContent" (click)="sideBarActive = !sideBarActive" class="menu-span glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+  <nav *ngIf="showContent" class="col-md-3" id="sidebar" [ngClass]="{'active': !sideBarActive}">
     <span (click)="sideBarActive = !sideBarActive"  class="close-span glyphicon glyphicon-remove"></span>
     <div class="white-text top-text">Your</div>
     <div class="white-text">best</div>
