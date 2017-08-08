@@ -27,7 +27,7 @@ export class SearchComponent {
 
   constructor(private weatherService: WeatherService,
                 private completerService: CompleterService) {
-    setTimeout(()=>this.showContent=true, 0);
+    setTimeout(()=>this.showContent=true, 2000);
   }
 
   /* Autocomplete related methods */
